@@ -6,7 +6,7 @@ st.write("Choose the fruits you want in your custom Smoothie!")
 name_on_order = st.text_input("Name on Smoothie:")
 st.write("The Name on your Smoothie will be:", name_on_order)
 
-session = get_active_session()
+
 
 fruit_df = session.table("smoothies.public.fruit_options").select("FRUIT_NAME")
 fruit_list = [row["FRUIT_NAME"] for row in fruit_df.collect()]
