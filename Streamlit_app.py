@@ -2,7 +2,8 @@ import streamlit as st
 from snowflake.snowpark.functions import col
 st.title(":cup_with_straw: Customize Your Smoothie! :cup_with_straw:")
 st.write("Choose the fruits you want in your custom Smoothie!")
-
+cnx=st.connection("snowflake")
+session=cnx.session()
 name_on_order = st.text_input("Name on Smoothie:")
 st.write("The Name on your Smoothie will be:", name_on_order)
 
@@ -11,8 +12,7 @@ st.write("The Name on your Smoothie will be:", name_on_order)
 fruit_df = session.table("smoothies.public.fruit_options").select("FRUIT_NAME")
 fruit_list = [row["FRUIT_NAME"] for row in fruit_df.collect()]
 
-cnx=st.connection("snowflake")
-session=cnx.session()
+
 
 ingredients_list = st.multiselect(
     "Choose up to 5 ingredients:",
